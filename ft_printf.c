@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chloeamerico <chloeamerico@student.42.f    +#+  +:+       +#+        */
+/*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:16:31 by camerico          #+#    #+#             */
-/*   Updated: 2025/03/31 20:31:26 by chloeameric      ###   ########.fr       */
+/*   Updated: 2025/04/01 12:55:26 by camerico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ int	ft_putstr(char *str)
 	return (i);
 }
 
-// int	ft_putnbr(unsigned int nb, int base)
-// {
-// 	int		i = nb % base;
-// 	char	*base_set = "0123456789abcdef";
-// 	int		count = 0;
-
-// 	if (nb / base > 0)
-// 		count += ft_putnbr(nb / base, base);
-// 	count += ft_putchar(base_set[i]);
-// 	return (count);
-// }
-
 int	ft_putnbr(int n)
 {
 	int	i = 0;
@@ -56,43 +44,20 @@ int	ft_putnbr(int n)
 	}
 	if (n < 0)
 	{
-		ft_putchar('-');
-		i++;
+		i += ft_putchar('-');
 		n *= -1;
 	}
 	if (n > 9)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-		i++;
+		i += ft_putnbr(n / 10);
+		i += ft_putnbr(n % 10);
 	}
 	else
-	{
-		ft_putchar(n + 48);
-		i++;
-	}
+		i += ft_putchar(n + 48);
 	return (i);
 }
 
-// int	print_d(int nb)
-// {
-// 	int		count = 0;
-
-// 	if (nb < 0)
-// 	{
-// 		count += ft_putchar('-');
-// 		if (nb == -2147483648)
-// 		{
-// 			count += ft_putstr("2147483648");
-// 			return (count);
-// 		}
-// 		nb = -nb;
-// 	}
-// 	count += ft_putnbr((unsigned int)nb, 10);
-// 	return (count);
-// }
-
-int	print_hexa(unsigned long n)
+int	print_hexa(unsigned int n)
 {
 	int		len;
 	char	*hexa = "0123456789abcdef";
@@ -144,3 +109,34 @@ int	main(void)
 	ft_printf("hexa : %x\n", nb2);
 	return (0);
 }
+
+
+// int	ft_putnbr(unsigned int nb, int base)
+// {
+// 	int		i = nb % base;
+// 	char	*base_set = "0123456789abcdef";
+// 	int		count = 0;
+
+// 	if (nb / base > 0)
+// 		count += ft_putnbr(nb / base, base);
+// 	count += ft_putchar(base_set[i]);
+// 	return (count);
+// }
+
+// int	print_d(int nb)
+// {
+// 	int		count = 0;
+
+// 	if (nb < 0)
+// 	{
+// 		count += ft_putchar('-');
+// 		if (nb == -2147483648)
+// 		{
+// 			count += ft_putstr("2147483648");
+// 			return (count);
+// 		}
+// 		nb = -nb;
+// 	}
+// 	count += ft_putnbr((unsigned int)nb, 10);
+// 	return (count);
+// }
