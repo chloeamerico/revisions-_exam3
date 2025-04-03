@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mygnl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camerico <camerico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chloeamerico <chloeamerico@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 18:22:55 by camerico          #+#    #+#             */
-/*   Updated: 2025/03/31 14:37:52 by camerico         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:08:12 by chloeameric      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_strdup(char *src)
 	char *dest;
 	int	i = 0;
 
+	if (!src)
+		return(NULL);
 	while (src[i])
 		i++;
 	dest = malloc(sizeof(char) * (i + 1));
@@ -40,8 +42,8 @@ char	*ft_strdup(char *src)
 char	*get_next_line(int fd)
 {
 	static char buffer[BUFFER_SIZE];
-	static int	buffer_pos;
-	static int	buffer_read;
+	static int	buffer_pos = 0;
+	static int	buffer_read = 0;
 	char	line[70000];
 	int	i = 0;
 
@@ -56,8 +58,8 @@ char	*get_next_line(int fd)
 			if (buffer_read <= 0)
 				break;
 		}
-		line[i++] = buffer[buffer_pos++];
-		if (line[i - 1] == '\n')
+		line[i] = buffer[buffer_pos++];
+		if (line[i++] == '\n')
 			break;
 	}
 	if (i == 0)
